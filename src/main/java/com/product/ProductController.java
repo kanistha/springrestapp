@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,8 +20,8 @@ public class ProductController {
     }
 
     @RequestMapping("/products/{id}")
-    public ResponseEntity<Product> getProduct(long id){
-        return new ResponseEntity<Product>(productService.getProduct(id),HttpStatus.OK);
+    public ResponseEntity<Product> getProduct(@RequestParam(value = "id", defaultValue = "0") long id){
+        return new ResponseEntity<>(productService.getProduct(id),HttpStatus.OK);
     }
 }
 

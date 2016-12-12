@@ -19,6 +19,6 @@ public class ProductService {
     }
 
     public Product getProduct(long id) {
-        return new Product();
+        return productRepository.getProduct(id);
     }
 }

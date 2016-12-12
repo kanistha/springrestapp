@@ -17,5 +17,10 @@ public class ProductController {
     public ResponseEntity getProducts(){
         return new ResponseEntity(productService.getProducts(),HttpStatus.OK);
     }
+
+    @RequestMapping("/products/{id}")
+    public ResponseEntity<Product> getProduct(long id){
+        return new ResponseEntity<Product>(productService.getProduct(id),HttpStatus.OK);
+    }
 }
 

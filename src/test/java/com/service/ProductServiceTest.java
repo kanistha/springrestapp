@@ -1,5 +1,8 @@
-package com.product;
+package com.service;
 
+import com.model.Product;
+import com.repository.ProductRepository;
+import com.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

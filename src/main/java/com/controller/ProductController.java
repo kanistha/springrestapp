@@ -1,11 +1,13 @@
-package com.product;
+package com.controller;
 
 
+import com.model.Product;
+import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,7 +22,7 @@ public class ProductController {
     }
 
     @RequestMapping("/products/{id}")
-    public ResponseEntity<Product> getProduct(@RequestParam(value = "id", defaultValue = "0") long id){
+    public ResponseEntity<Product> getProduct(@PathVariable(value = "id") long id){
         return new ResponseEntity<>(productService.getProduct(id),HttpStatus.OK);
     }
 }

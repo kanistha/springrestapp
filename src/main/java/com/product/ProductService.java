@@ -21,4 +21,16 @@ public class ProductService {
     public Product getProduct(long id) {
         return productRepository.getProduct(id);
     }
+
+    public Product saveProduct(Product product) {
+        return null;
+    }
+
+    public void deleteProduct(String id) {
+
+    }
+
+    public Product updateProduct(Product product) {
+        return null;
+    }
 }

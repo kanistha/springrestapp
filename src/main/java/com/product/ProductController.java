@@ -4,24 +4,40 @@ package com.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/products")
+    @GetMapping
     public ResponseEntity getProducts(){
         return new ResponseEntity(productService.getProducts(),HttpStatus.OK);
     }
 
-    @RequestMapping("/products/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@RequestParam(value = "id", defaultValue = "0") long id){
         return new ResponseEntity<>(productService.getProduct(id),HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody Product product){
+        Product finalProduct = productService.saveProduct(product);
+        return new ResponseEntity<Product>(finalProduct, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product productToUpdate){
+        return new ResponseEntity<Product>(productToUpdate, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public  void deleteProduct(@PathVariable String id) {
+        productService.deleteProduct(id);
+    }
+
 }
 

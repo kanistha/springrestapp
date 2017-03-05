@@ -14,7 +14,7 @@ public class ProductRepository {
 
     private Product getProduct() {
         Product product = new Product();
-        product.setId(1);
+        product.setId(new Long(1));
         product.setName("smartphone");
         product.setPrice(100);
         return product;

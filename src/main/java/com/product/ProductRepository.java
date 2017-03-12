@@ -1,5 +1,7 @@
 package com.product;
 
+import org.hibernate.validator.internal.engine.resolver.JPATraversableResolver;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,4 +21,8 @@ public class ProductRepository {
         product.setPrice(100);
         return product;
     }
+
+ public Product  save(Product product){
+        return null;
+ }
 }

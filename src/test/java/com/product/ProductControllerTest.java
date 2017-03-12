@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -41,31 +40,36 @@ public class ProductControllerTest {
 
     @Test
     public void testGetAllProducts() throws Exception {
-
+        //Given
         List<Product> products =  new ArrayList<Product>();
         products.add(new Product(new Long(1),"Product1", 100));
         given(productService.getProducts()).willReturn(products);
+
+        //When & Then
         this.mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].id",is(products.get(0).getId().intValue())))
                 .andExpect(jsonPath("$[0].name", is(products.get(0).getName())))
                 .andExpect(jsonPath("$[0].price", is(products.get(0).getPrice())));
+
+        //Then
         verify(productService, atLeastOnce()).getProducts();
     }
 
     @Test
     public void testGetProductById() throws Exception {
         Long id = new Long(10);
-
         Product product = new Product(id, "Product1", 100);
         given(productService.getProduct(anyLong())).willReturn(product);
+
         mockMvc.perform(get("/products/$id"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id",is(product.getId().intValue())))
                 .andExpect(jsonPath("$.name",is(product.getName())))
                 .andExpect(jsonPath("$.price", is(product.getPrice())));
 
+        verify(productService).getProduct(anyLong());
     }
 
     @Test
@@ -73,6 +77,7 @@ public class ProductControllerTest {
         Long id = new Long(10);
         Product product = new Product(id, "Product1", 100);
         given(productService.saveProduct(any(Product.class))).willReturn(product);
+
         mockMvc.perform(post("/products")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(json(product)))
@@ -80,6 +85,8 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.id",is(product.getId().intValue())))
                 .andExpect(jsonPath("$.name",is(product.getName())))
                 .andExpect(jsonPath("$.price", is(product.getPrice())));
+
+        verify(productService).saveProduct(any(Product.class));
     }
 
     @Test
@@ -87,6 +94,7 @@ public class ProductControllerTest {
         Long id = new Long(10);
         Product productToUpdate = new Product(id, "product", 200);
         given(productService.updateProduct(any(Product.class))).willReturn(productToUpdate);
+
         mockMvc.perform(put("/products/$id")
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(json(productToUpdate)))
@@ -99,6 +107,7 @@ public class ProductControllerTest {
     @Test
     public void testDeleteProduct() throws Exception {
             Long id = new Long(10);
+
             mockMvc.perform(delete("/products/$id"))
                     .andExpect(status().isOk());
 

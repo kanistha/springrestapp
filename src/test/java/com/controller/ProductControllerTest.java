@@ -1,5 +1,8 @@
-package com.product;
+package com.controller;
 
+import com.controller.ProductController;
+import com.model.Product;
+import com.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

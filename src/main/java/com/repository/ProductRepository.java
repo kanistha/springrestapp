@@ -1,10 +1,14 @@
-package com.product;
+package com.repository;
+
+import com.model.Product;
+import org.springframework.stereotype.Component;
 
 import org.hibernate.validator.internal.engine.resolver.JPATraversableResolver;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class ProductRepository {
     public List<Product> getProducts() {
         return Arrays.asList(getProduct());

@@ -1,5 +1,6 @@
-package com.message;
+package com.controller;
 
+import com.model.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

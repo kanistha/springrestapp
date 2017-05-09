@@ -56,6 +56,7 @@ public class ProductControllerIntegrationTest {
         verify(productService,atLeastOnce()).getProduct(1);
     }
 
+    @Ignore
     @Test
     public void shouldSaveProduct() throws Exception {
 

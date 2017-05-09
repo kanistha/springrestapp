@@ -1,8 +1,7 @@
 package com.service;
 
 import com.model.Product;
-import com.repository.ProductRepository;
-import com.service.ProductService;
+import com.repositories.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -30,7 +29,7 @@ public class ProductServiceTest {
     public void getProducts_returnsAllProducts() throws Exception {
         //given
         Product product = new Product(1L, "Mobile", 1000.0);
-        given(productRepository.getProducts()).willReturn(asList(product));
+        given(productRepository.findAll()).willReturn(asList(product));
 
         //when
         List<Product> products = productService.getProducts();
@@ -41,27 +40,27 @@ public class ProductServiceTest {
         assertThat(products.get(0).getId()).isEqualTo(1);
         assertThat(products.get(0).getName()).isEqualTo("Mobile");
         assertThat(products.get(0).getPrice()).isEqualTo(1000.0);
-        verify(productRepository, atLeastOnce()).getProducts();
+        verify(productRepository, atLeastOnce()).findAll();
     }
 
     @Test
     public void getProducts_whenNoRecords_returnsNull() throws Exception {
-        given(productRepository.getProducts()).willReturn(null);
+        given(productRepository.findAll()).willReturn(null);
 
         assertThat(productService.getProducts()).isNullOrEmpty();
 
-        verify(productRepository, atLeastOnce()).getProducts();
+        verify(productRepository, atLeastOnce()).findAll();
     }
 
     @Test
     public void getProduct_returnsProductByGivenId() throws Exception {
-        given(productRepository.getProduct(1L))
+        given(productRepository.findOne(1L))
                 .willReturn(new Product(1L, "smartphone", 1000.0));
 
         assertThat(productService.getProduct(1L)).isNotNull();
         assertThat(productService.getProduct(1).getName()).isEqualTo("smartphone");
         assertThat(productService.getProduct(1).getPrice()).isEqualTo(1000.0);
-        verify(productRepository, atLeastOnce()).getProduct(1L);
+        verify(productRepository, atLeastOnce()).findOne(1L);
 
     }
 

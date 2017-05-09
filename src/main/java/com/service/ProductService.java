@@ -1,7 +1,7 @@
 package com.service;
 
 import com.model.Product;
-import com.repository.ProductRepository;
+import com.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -19,20 +19,22 @@ public class ProductService {
     }
 
     public List<Product> getProducts() {
-        return productRepository.getProducts();
+        return(List<Product>)productRepository.findAll();
     }
 
     public Product getProduct(long id) {
-        return productRepository.getProduct(id);
+        return productRepository.findOne(id);
     }
 
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public void deleteProduct(String id) { }
+    public void deleteProduct(String id) {
+        productRepository.delete(Long.parseLong(id));
+    }
 
     public Product updateProduct(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 }

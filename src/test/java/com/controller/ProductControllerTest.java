@@ -51,7 +51,7 @@ public class ProductControllerTest {
         this.mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0].id",is(products.get(0).getId())))
+                .andExpect(jsonPath("$[0].id",is(1)))
                 .andExpect(jsonPath("$[0].name", is(products.get(0).getName())))
                 .andExpect(jsonPath("$[0].price", is(products.get(0).getPrice())));
 
@@ -61,13 +61,12 @@ public class ProductControllerTest {
 
     @Test
     public void testGetProductById() throws Exception {
-        Long id = new Long(10);
-        Product product = new Product(id, "Product1", 100);
+        Product product = new Product(10L, "Product1", 100);
         given(productService.getProduct(anyLong())).willReturn(product);
 
-        mockMvc.perform(get("/products/$id"))
+        mockMvc.perform(get("/products/10"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id",is(product.getId().intValue())))
+                .andExpect(jsonPath("$.id",is(10)))
                 .andExpect(jsonPath("$.name",is(product.getName())))
                 .andExpect(jsonPath("$.price", is(product.getPrice())));
 

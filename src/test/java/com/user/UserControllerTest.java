@@ -1,6 +1,10 @@
 package com.user;
 
+import com.controller.UserController;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.model.Department;
+import com.model.User;
+import com.service.UserService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

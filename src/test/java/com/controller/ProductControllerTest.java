@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.controller.ProductController;
 import com.model.Product;
 import com.service.ProductService;
 import org.junit.Test;
@@ -52,7 +51,7 @@ public class ProductControllerTest {
         this.mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0].id",is(products.get(0).getId().intValue())))
+                .andExpect(jsonPath("$[0].id",is(products.get(0).getId())))
                 .andExpect(jsonPath("$[0].name", is(products.get(0).getName())))
                 .andExpect(jsonPath("$[0].price", is(products.get(0).getPrice())));
 

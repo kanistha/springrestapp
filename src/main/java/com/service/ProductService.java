@@ -30,9 +30,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void deleteProduct(String id) {
-
-    }
+    public void deleteProduct(String id) { }
 
     public Product updateProduct(Product product) {
         return null;

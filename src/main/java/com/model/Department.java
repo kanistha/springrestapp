@@ -1,9 +1,12 @@
 package com.model;
 
+import javax.persistence.*;
+
 public class Department {
 
     private long id;
     private String name;
+    private User user;
 
     public Department() {
     }
@@ -45,6 +48,14 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

@@ -41,7 +41,5 @@ public class LegalDocumentRestClient {
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
-
         }
-
 }
